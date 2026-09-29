@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento | Espaço Manicure</title>
+    <!-- Fontes Elegantes do Google -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Ícones Modernos -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <style>
+        :root {
+            --rose-gold: #c5a880;
+            --rose-quartz: #f7e1d7;
+            --vinho-luxo: #4a2834;
+            --rosa-suave: #fff5f5;
+            --texto-escuro: #2b2b2b;
+            --texto-claro: #6b6b6b;
+            --whatsapp-green: #25d366;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fbf7f4 0%, #f3e9e5 100%);
+            color: var(--texto-escuro);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(74, 40, 52, 0.06);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--vinho-luxo);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .divisor {
+            width: 50px;
+            height: 2px;
+            background-color: var(--rose-gold);
+            margin: 12px auto;
+        }
+
+        p.subtitulo {
+            font-size: 14px;
+            color: var(--texto-claro);
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--vinho-luxo);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: var(--rose-gold);
+            font-size: 16px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 1.5px solid #e2dcd8;
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--texto-escuro);
+            background-color: #fdfcfb;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--rose-gold);
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(197, 168, 128, 0.15);
+        }
+
+        /* Ajuste para inputs do tipo data/hora nativos */
+        input[type="date"], input[type="time"] {
+            color: var(--texto-escuro);
+        }
+
+        .info-pagamento {
+            background-color: var(--rosa-suave);
+            border-left: 3px solid var(--rose-gold);
+            padding: 14px 16px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 13px;
+            color: #554147;
+            line-height: 1.6;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .info-pagamento i {
+            color: var(--rose-gold);
+            margin-top: 2px;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--vinho-luxo);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(74, 40, 52, 0.15);
+        }
+
+        button:hover {
+            background-color: #381d26;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(74, 40, 52, 0.2);
+        }
+
+        button i {
+            font-size: 18px;
+            color: var(--whatsapp-green);
+        }
+
+        .sucesso {
+            display: none;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid #c8e6c9;
+        }
+
+        /* Responsividade para telas muito pequenas */
+        @media (max-width: 400px) {
+            .container {
+                padding: 25px 20px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Espaço Manicure</h1>
+        <div class="divisor"></div>
+        <p class="subtitulo">Escolha seu serviço e horário preferido. A confirmação será enviada via WhatsApp.</p>
+    </header>
+
+    <form id="formAgendamento">
+        <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="nome" required placeholder="Ex: Maria Silva">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="whatsapp">Seu WhatsApp</label>
+            <div class="input-wrapper">
+                <i class="fa-brands fa-whatsapp"></i>
+                <input type="tel" id="whatsapp" required placeholder="(00) 00000-0000">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="servico">Serviço desejado</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-sparkles"></i>
+                <select id="servico" required>
+                    <option value="">Selecione um serviço...</option>
+                    <option value="Mão Simples - R$ 30,00">Mão Simples — R$ 30,00</option>
+                    <option value="Pé e Mão - R$ 60,00">Pé e Mão — R$ 60,00</option>
+                    <option value="Alongamento em Gel - R$ 120,00">Alongamento em Gel — R$ 120,00</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="data">Data do Atendimento</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-calendar"></i>
+                <input type="date" id="data" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="hora">Horário</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-clock"></i>
+                <select id="hora" required>
+                    <option value="">Selecione um horário...</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="13:30">13:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:30">16:30</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="info-pagamento">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+                <strong>Aviso importante:</strong> O pagamento será realizado de forma <strong>presencial</strong> no dia do atendimento (Dinheiro, Pix ou Cartão).
+            </div>
+        </div>
+
+        <button type="submit">
+            <i class="fa-brands fa-whatsapp"></i> Agendar pelo WhatsApp
+        </button>
+    </form>
+
+    <div id="mensagemSucesso" class="sucesso">
+        <i class="fa-solid fa-spinner fa-spin"></i> Redirecionando para o WhatsApp...
+    </div>
+</div>
+
+<script>
+    // AJUSTE SEU NÚMERO AQUI: Código do país (55) + DDD + Seu Número
+    const SEU_NUMERO_WHATSAPP = '5500000000000'; 
+
+    // Define a data mínima como hoje automaticamente
+    const hoje = new Date().toISOString().split('T')[0];
+    document.getElementById('data').min = hoje;
+
+    document.getElementById('formAgendamento').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nome').value;
+        const whatsappCliente = document.getElementById('whatsapp').value;
+        const servico = document.getElementById('servico').value;
+        const dataOriginal = document.getElementById('data').value;
+        const hora = document.getElementById('hora').value;
+
+        // Formata a data para DD/MM/AAAA
+        const dataFormatada = dataOriginal.split('-').reverse().join('/');
+
+        // Mensagem estruturada para o WhatsApp
+        const textoMensagem = `Olá! Gostaria de realizar um agendamento:\n\n` +
+                              `💅 *Cliente:* ${nome}\n` +
+                              `📱 *Contato:* ${whatsappCliente}\n` +
+                              `✨ *Serviço:* ${servico}\n` +
+                              `📅 *Data:* ${dataFormatada}\n` +
